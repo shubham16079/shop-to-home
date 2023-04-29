@@ -1,8 +1,24 @@
 <?php
 
 use Illuminate\Contracts\Http\Kernel;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
+require __DIR__ . '/../bootstrap.php';
+use Bref\Context\Context;
+use Bref\Event\Http\HttpRequestEvent;
+use Bref\Event\Http\HttpResponse;
 
+
+$app = require_once __DIR__ . '/../bootstrap/app.php';
+
+$kernel = $app->make(Kernel::class);
+
+/**
+ * Handle the incoming Lambda event.
+ */
+// return function (HttpRequestEvent $event, Context $context): HttpResponse {
+//     // Handle the event and return a response.
+
+// };
 define('LARAVEL_START', microtime(true));
 
 /*

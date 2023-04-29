@@ -1,0 +1,14 @@
+service: my-laravel-service
+provider:
+  name: aws
+  runtime: provided.al2
+  region: eu-west-1
+  stage: dev
+  profile: my-aws-profile
+  environment:
+    APP_KEY: 'base64:V/Qyu/N4Ya/B3Sw7hXJGASzT/n8oSxjyxuKAgBrbICQ='
+functions:
+  my-laravel-function:
+    handler: public/index.php
+    layers:
+      - ${bref:layer.php-73}
