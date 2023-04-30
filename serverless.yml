@@ -1,14 +1,26 @@
-service: my-laravel-service
+service: app
+
 provider:
-  name: aws
-  runtime: provided.al2
-  region: eu-west-1
-  stage: dev
-  profile: my-aws-profile
-  environment:
-    APP_KEY: 'base64:V/Qyu/N4Ya/B3Sw7hXJGASzT/n8oSxjyxuKAgBrbICQ='
+    name: aws
+    region: us-east-1
+    runtime: provided.al2
+    deploymentMethod: direct # fastest deployment method
+
+plugins:
+    - ./vendor/bref/bref
+
 functions:
-  my-laravel-function:
-    handler: public/index.php
-    layers:
-      - ${bref:layer.php-73}
+    api:
+        handler: index.php
+        description: ''
+        timeout: 28 # in seconds (API Gateway has a timeout of 29 seconds)
+        layers:
+            - ${bref:layer.php-74-fpm}
+        events:
+            -   httpApi: '*'
+
+# Exclude files from deployment
+package:
+    patterns:
+        - '!node_modules/**'
+        - '!tests/**'
